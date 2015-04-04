@@ -1,0 +1,48 @@
+Automatically Generated Flows
+=============================
+
+Source Files id=r_files
+----------------
+master.R
+exchange_functions.R
+filing_functions.R
+index_clean_controller.R
+
+Generated Flow id=r_flow
+--------------
+master.R
+	main 
+		main_prepare_dependencies
+		main_data_processing
+	main_prepare_dependencies 
+		download_country_state_codes
+		single_dl_sic_6189
+		download_exchange_listings
+		single_prepare_compustat_data
+exchange_functions.R
+	main_exchange_functions 
+		single_merge_data
+	read_batch_exchange_listing_x 
+		< array_exchange_listing_x 
+	single_merge_data 
+		< batch_exchange_listing_x #@ < array_exchange_listing_x
+		process_clean_exchange_listing_data
+		> batch_clean_exchange_listing_x
+		> merged_lists
+filing_functions.R
+	read_array_class_x 
+		< array_companies_in_class_x
+	download_filing 
+			download.file
+	download_company_filings #@ > formname.txt
+		apply( urls_fun_filings
+	get.filing.names.based.on.cik 
+index_clean_controller.R
+	.single_clean_filing_indexes 
+		< array_company_0000_qtr0
+		> array_company_0000_qtr0_clean
+	.single_merge_clean 
+		process_merge_clean
+		> merged
+	process_merge_clean 
+		< array_company_0000_qtr0_clean
