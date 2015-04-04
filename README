@@ -33,6 +33,9 @@ For example, I have the following list of R files in automatic_flow.otl:
 
 The generator script crawls these 3 R files and extracts all the functions that contain a read/write function inside.
 
+Customizing for your project
+----------------------------
+
 Note that, you should specify the path to the automatic_flow.otl file for your project by changing the following line in vim-dataflow-generator-r.vim:
 
 	let path_to_generated_doc = "~/projects/SEC_Filings/parser/automatic_flow.otl"
