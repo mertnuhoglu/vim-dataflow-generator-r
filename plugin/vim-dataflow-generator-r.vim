@@ -1,7 +1,7 @@
 " UPDATE the path to the generated document
-let path_to_generated_doc = "~/projects/SEC_Filings/parser/automatic_flow.otl"
+let g:path_to_generated_doc = "~/projects/SEC_Filings/parser/automatic_flow.otl"
 
-command! EFlowAutomatic exe 'e ' . path_to_generated_doc
+command! EFlowAutomatic :exe 'e ' . g:path_to_generated_doc
 
 function! DataflowFromRCode()
 	" rules:
@@ -17,8 +17,9 @@ function! DataflowFromRCode()
 	set buftype=nofile
 	file dataflow
 	normal! "0p
-	" retain only i/o keywords
+	" remove comments except #@ comments
 	g/#[^@]/d
+	# delete everything except io conventions and wrapper functions
 	v/\(single\|process\|read\|write\|function\|download\|unzip\|convert\|main\)\|\(\<\w\+\.sh\|#@\)\>/d
 		" requires paranthesis
 		"v/\(single\|process\|read\|write\|function\|download\|unzip\|convert\|main\).*(\|\(\<\w\+\.sh\|#@\)\>/d
